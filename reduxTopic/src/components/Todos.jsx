@@ -1,12 +1,11 @@
 import React from 'react'
-import {useDispatch, useSelector } from 'react-redux'
-import { removeTOdo } from '../feature/Slicing'
+import { useSelector, useDispatch } from 'react-redux'
+import {removeTOdo} from '../feature/Slicing'
 
 function Todos() {
+    const todos = useSelector((state) => state.Todos)
+    const dispatch = useDispatch()
 
-  const todos=  useSelector((state)=>state.Todos)
-  const dispatchInfo= useDispatch()
-  console.log(todos);
   return (
     <>
     <div>Todos</div>
@@ -18,7 +17,7 @@ function Todos() {
           >
             <div className='text-white'>{todo.text}</div>
             <button
-             onClick={() => dispatchInfo(removeTOdo(todo.id))}
+             onClick={() => dispatch(removeTOdo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             >
               <svg
