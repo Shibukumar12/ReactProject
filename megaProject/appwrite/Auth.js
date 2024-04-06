@@ -11,16 +11,16 @@ export class Authservice{
         this.account=new Account(this.client)
      }
 
-    async Signup (email,password,name)   {
+    async Signup ({email,password,name})   {
         try {
            const createAccount= await this.account.create(ID.unique(),email,password,name)
-           return createAccount
+           this.Login({email,password})
         } catch (error) {
             throw error
         }
     }  
 
-    async Login(email,password){
+    async Login({email,password}){
         try {
             const loginUser=  await this.account.createEmailPasswordSession(email,password)
             return loginUser
