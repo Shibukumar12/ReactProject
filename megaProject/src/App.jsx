@@ -1,16 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Conf from './conf/Conf';
+import {useDispatch} from 'react-redux'
+import { authservice } from '../appwrite/Auth';
+import { login, logout } from './store/featureSlicing'
+import { Footer, Header } from './components'
 
 function App() {
-  
-  console.log(Conf.appwriteUrl);
+  const [loading, setloading] = useState(true)
+  const dispatch = useDispatch()
 
-  return (
-    <>
-     <h1>mega project is to be ready</h1>
-    </>
-  )
+  useEffect(() => {
+    authservice.Getcurrentuser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }))
+        }
+        else {
+          dispatch(logout())
+        }
+      })
+      .finally(() => {
+        setloading(false)
+      })
+  }, [])
+
+  return !loading ? (
+    <div className='min-h-screen flex justify-center flex-wrap bg-gray-400 '>
+      <div className='text-white '>
+        <Header/>
+        <Footer/>
+      </div>
+    </div>
+  ) : null
 }
+
 
 export default App
