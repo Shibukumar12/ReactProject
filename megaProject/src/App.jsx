@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Conf from './conf/Conf';
-import {useDispatch} from 'react-redux'
-import { authservice } from '../appwrite/Auth';
+import { useDispatch } from 'react-redux'
+import { authservice } from './appwrite/Auth';
 import { login, logout } from './store/featureSlicing'
-import { Footer, Header } from './components'
+import { Footer, Header } from './components/index'
 
 function App() {
   const [loading, setloading] = useState(true)
@@ -27,9 +27,9 @@ function App() {
 
   return !loading ? (
     <div className='min-h-screen flex justify-center flex-wrap bg-gray-400 '>
-      <div className='text-white '>
-        <Header/>
-        <Footer/>
+      <div className='text-green-800 text-3xl '>
+        <Header />
+        <Footer />
       </div>
     </div>
   ) : null
